@@ -59,7 +59,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Facial Recognition Login</h1>
+      <h1>QR Code Scanner</h1>
       <video ref={videoRef} width="640" height="480" muted playsInline />
     </div>
   );
