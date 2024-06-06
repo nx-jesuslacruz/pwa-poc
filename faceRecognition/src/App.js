@@ -30,7 +30,7 @@ function App() {
 
         const video = videoRef.current;
         const canvas = faceapi.createCanvasFromMedia(video);
-        document.body.append(canvas);
+        document.getElementById('root').append(canvas);
         const displaySize = { width: video.width, height: video.height };
         faceapi.matchDimensions(canvas, displaySize);
         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
@@ -43,7 +43,7 @@ function App() {
 
       startVideo();
 
-      videoRef.current.addEventListener('canplay', () => {
+      videoRef.current.addEventListener('loadedmetadata', () => {
         videoRef.current.play();
         run();
       });
@@ -52,10 +52,10 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <>
       <h1>Facial Recognition Login</h1>
       <video ref={videoRef} width="640" height="480" muted playsInline />
-    </div>
+    </>
   );
 }
 
