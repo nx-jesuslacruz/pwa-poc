@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import * as faceapi from 'face-api.js';
 import './App.css';
 
 function App() {
@@ -44,8 +43,7 @@ function App() {
           console.log(barcodes)
           if (barcodes.length > 0) {
             let barcodeData = barcodes[0].rawValue;
-            alert("Detected QR code with the following content: " + barcodeData);
-            barcodes = [];
+            window.location = barcodeData;
           };
 
           requestAnimationFrame(checkForQrCode);
@@ -57,31 +55,6 @@ function App() {
 
       videoRef.current.addEventListener('play', () => { console.log('Video is playing'); });
     }
-
-    // async function loadModels() {
-    //    await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-    //    await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-    //    await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
-    //    await faceapi.nets.ssdMobilenetv1.loadFromUri('/models');
-    // }
-
-    // async function handleVideoPlay() {
-    //   const video = videoRef.current;
-    //   const canvas = await faceapi.createCanvasFromMedia(video);
-    //   document.body.append(canvas);
-    //   const displaySize = { width: video.width, height: video.height };
-    //   faceapi.matchDimensions(canvas, displaySize);
-
-    //   setInterval(async () => {
-    //      await  loadModels();
-    //      const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptors();
-    //      const resizedDetections = faceapi.resizeResults(detections, displaySize);
-    //      const context = canvas.getContext('2d');
-    //      context.clearRect(0, 0, canvas.width, canvas.height);
-    //      faceapi.draw.drawDetections(canvas, resizedDetections);
-    //      faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-    //    }, 100);
-    // }
   }, []);
 
   return (
